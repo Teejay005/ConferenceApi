@@ -18,6 +18,7 @@ namespace ConferenceApi.Middleware
                 throw new ArgumentNullException(nameof(services));
 
             services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<IValidationService, ValidationService>();
             return services;
         }
     }

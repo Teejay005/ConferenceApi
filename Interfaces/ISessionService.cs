@@ -1,5 +1,6 @@
 ﻿using ConferenceApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ConferenceApi.Interfaces
 {
@@ -7,6 +8,6 @@ namespace ConferenceApi.Interfaces
     {
         public List<Session> GetSessions();
 
-        public List<Session> GetSessionsFor(string speakerName, string date, string timeSlot);
+        public Task<List<Session>> GetSessionsFor(string speakerName, string date, string timeSlot);
     }
 }

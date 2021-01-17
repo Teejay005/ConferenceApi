@@ -2,6 +2,7 @@
 using ConferenceApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ConferenceApi.Services
 {
@@ -12,7 +13,7 @@ namespace ConferenceApi.Services
             return Stubs.SessionStub.CreateSessions();
         }
 
-        public List<Session> GetSessionsFor(string speakerName, string date, string timeSlot)
+        public async Task<List<Session>> GetSessionsFor(string speakerName, string date, string timeSlot)
         {
             return GetSessions().Where(x => x.Speaker.Name == speakerName && x.Date == date && x.Timeslot == timeSlot).ToList();
         }

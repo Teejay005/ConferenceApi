@@ -2,6 +2,7 @@
 using ConferenceApi.Interfaces;
 using ConferenceApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -16,11 +17,13 @@ namespace ConferenceApi.Controllers
     {
         private readonly ILogger<SessionController> _logger;
         private ISessionService _sessionService;
+        private IValidationService _validationService;
 
-        public SessionController(ILogger<SessionController> logger, ISessionService sessionService)
+        public SessionController(ILogger<SessionController> logger, ISessionService sessionService, IValidationService validationService)
         {
             _logger = logger;
             _sessionService = sessionService;
+            _validationService = validationService;
         }
 
         [HttpGet]
@@ -35,7 +38,13 @@ namespace ConferenceApi.Controllers
         public async Task<ActionResult<IEnumerable<Session>>> Get(string speakerName, string date, string timeSlot)
         {
             _logger.LogInformation($"Request made with following query params: speaker - {speakerName}, date - {date}, timeslot - {timeSlot}");
-            var Sessions = new List<Session>();
+
+            if (!_validationService.ValidateRequestParameters(speakerName, date, timeSlot))
+            {
+                _logger.LogError("Exception was throw for supplying invalid parameters");
+                 throw new ConferenceAPIException("Ensure all parameters are supplied");
+            }
+            var Sessions = await _sessionService.GetSessionsFor(speakerName, date, timeSlot);
            
             return Sessions;
         }
