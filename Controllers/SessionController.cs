@@ -18,6 +18,7 @@ namespace ConferenceApi.Controllers
         public SessionController(ILogger<SessionController> logger, ISessionService sessionService)
         {
             _logger = logger;
+            _sessionService = sessionService;
         }
 
         [HttpGet]
