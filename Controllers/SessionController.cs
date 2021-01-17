@@ -1,4 +1,5 @@
-﻿using ConferenceApi.Interfaces;
+﻿using ConferenceApi.Attributes;
+using ConferenceApi.Interfaces;
 using ConferenceApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace ConferenceApi.Controllers
 {
     [Route("conference/[controller]")]
+    [Security]
     [ApiController]
     public class SessionController : ControllerBase
     {
@@ -24,7 +26,7 @@ namespace ConferenceApi.Controllers
         [HttpGet]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(ResponseCodes.Bad_Request, Type = typeof(ActionResult))]
-        [ProducesResponseType(ResponseCodes.Created, Type = typeof(ActionResult))]
+        [ProducesResponseType(ResponseCodes.Success, Type = typeof(List<Session>))]
         [ProducesResponseType(ResponseCodes.Internal_Server_Error, Type = typeof(ActionResult))]
         [ProducesResponseType(ResponseCodes.Invalid_Data, Type = typeof(ActionResult))]
         [ProducesResponseType(ResponseCodes.Bad_Request, Type = typeof(ActionResult))]
