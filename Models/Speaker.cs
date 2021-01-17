@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConferenceApi.Controllers
+namespace ConferenceApi.Models
 {
     public class Speaker
     {

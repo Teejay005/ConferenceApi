@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ConferenceApi.Attribute
+namespace ConferenceApi.Attributes
 {
     [AttributeUsage(validOn: AttributeTargets.Class)]
     public class SecurityAttribute : FlagsAttribute, IAsyncActionFilter
